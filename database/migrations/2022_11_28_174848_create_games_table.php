@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('lists', function (Blueprint $table) {
+        Schema::create('games', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_user');
-            $table->integer('id_game');
-            $table->integer('list_type');
+            $table->string('name');
+            $table->string('image');
+            $table->longText('description');
+            $table->date('date_relase');
+            $table->integer('score')->default(0);
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lists');
+        Schema::dropIfExists('games');
     }
 };
