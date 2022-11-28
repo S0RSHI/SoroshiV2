@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\GameController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,17 +16,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    
-      // If admin, return admin view
-      if(Auth::check())
-        return redirect()->route('dashboard');
-      else
-         return view('welcome');
+      return Auth::check() ? redirect()->route('dashboard') : view('welcome');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard', function () {
+  return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/create-game', function () {
+  return Auth::user()->is_admin ? view('create-game') : redirect()->route('dashboard');
+});
+
+Route::resource('games', GameController::class)
+    ->only(['index', 'store'])
+    ->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

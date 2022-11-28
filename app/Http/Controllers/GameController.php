@@ -24,7 +24,7 @@ class GameController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -35,7 +35,11 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'game-name' => 'required',
+        ]);
+
+       return $validated ? redirect()->back()->with('message',$request->input('game-name')) : redirect()->back()->with('message','error !');
     }
 
     /**
