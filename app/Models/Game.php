@@ -11,7 +11,7 @@ class Game extends Model
 
     protected $fillable = [
         'name',
-        'date_relase',
+        'date_release',
         'image',
         'description',
     ];

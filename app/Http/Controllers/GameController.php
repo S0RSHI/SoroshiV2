@@ -14,7 +14,10 @@ class GameController extends Controller
      */
     public function index()
     {
-        //
+
+        return view('games', [
+           'games' => Game::paginate(3)
+        ]);
     }
 
     /**
@@ -40,22 +43,30 @@ class GameController extends Controller
                 'name' => 'required',
                 'image' => 'required|url',
                 'description' => 'required|max:5000',
-                'date_relase' => 'required|date'
+                'date_release' => 'required|date|'
             ],
             [
                 'name.required' => 'This field is required',
-                'date_relase.required' => 'This field is required',
-                'date_relase.date' => 'Wrong date format',
+                'date_release.required' => 'This field is required',
+                'date_release.date' => 'Wrong date format',
                 'image.required' => 'This field is required',
                 'image.url' => 'Wrong link to image',
                 'description.required' => 'This field is required',
                 'description.max' => 'Too long description',
             ]
         );
-        $request->user()->games()->create($validated);
 
+        $isExist = Game::where([
+            ['name', '=' , $validated['name']],
+            ['date_release', '=' , $validated['date_release']]
+        ])->first();
 
-         return redirect('/dashboard')->with('status', 'Profile updated!');
+        if(!$isExist)
+            $request->user()->games()->create($validated);
+        else
+            return back()->with('status', 409);
+
+        return redirect('/dashboard')->with('status', 200);
     }
 
     /**

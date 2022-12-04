@@ -32,7 +32,7 @@ Route::get('/create-game', function () {
 });
 
 Route::resource('games', GameController::class)
-    ->only(['index', 'store'])
+    ->only(['index','store'])
     ->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {

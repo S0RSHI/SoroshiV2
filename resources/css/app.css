@@ -18,3 +18,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     top: 0;
     width: auto;
 }
+
+.isExist__close {
+    top: -12px;
+    right: -12px;
+}
