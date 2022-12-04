@@ -55,7 +55,7 @@ class GameController extends Controller
         $request->user()->games()->create($validated);
 
 
-        // return redirect(route('/create-game'));
+         return redirect('/dashboard')->with('status', 'Profile updated!');
     }
 
     /**
