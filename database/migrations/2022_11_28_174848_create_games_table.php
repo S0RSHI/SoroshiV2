@@ -20,6 +20,7 @@ return new class extends Migration
             $table->longText('description');
             $table->date('date_relase');
             $table->integer('score')->default(0);
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

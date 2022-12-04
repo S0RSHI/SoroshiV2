@@ -35,11 +35,27 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'game-name' => 'required',
-        ]);
+        $validated = $request->validate(
+            [
+                'name' => 'required',
+                'image' => 'required|url',
+                'description' => 'required|max:5000',
+                'date_relase' => 'required|date'
+            ],
+            [
+                'name.required' => 'This field is required',
+                'date_relase.required' => 'This field is required',
+                'date_relase.date' => 'Wrong date format',
+                'image.required' => 'This field is required',
+                'image.url' => 'Wrong link to image',
+                'description.required' => 'This field is required',
+                'description.max' => 'Too long description',
+            ]
+        );
+        $request->user()->games()->create($validated);
 
-       return $validated ? redirect()->back()->with('message',$request->input('game-name')) : redirect()->back()->with('message','error !');
+
+        // return redirect(route('/create-game'));
     }
 
     /**
