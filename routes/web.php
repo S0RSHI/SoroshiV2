@@ -32,8 +32,10 @@ Route::get('/create-game', function () {
 });
 
 Route::resource('games', GameController::class)
-    ->only(['index','store'])
+    ->only(['store'])
     ->middleware(['auth', 'verified']);
+
+Route::get('/games',[GameController::class, 'index'])->name('games');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

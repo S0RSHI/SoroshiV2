@@ -6,6 +6,5 @@
             @endforeach
             <x-pagination :items="$games"/>
         </div>
-
     </div>
 </x-app-layout>
