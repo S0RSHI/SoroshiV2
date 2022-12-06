@@ -1,5 +1,5 @@
 <?php
-    $allPages = ceil($items->total()/1);
+    $allPages = ceil($items->total()/16);
     $currentPage = $items->currentPage();
     $lastPage = $items->lastPage();
     $iPagination = $currentPage-2;
