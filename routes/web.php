@@ -19,6 +19,8 @@ Route::get('/', function () {
       return Auth::check() ? redirect()->route('dashboard') : view('welcome');
 });
 
+Route::get('/game/{id}', [GameController::class, 'show'])->name('game');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

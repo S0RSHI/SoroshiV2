@@ -75,9 +75,14 @@ class GameController extends Controller
      * @param  \App\Models\Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function show(Game $game)
+    public function show(Game $game, $id)
     {
-        //
+        $singleGame = Game::find($id);
+        if($singleGame)
+            return view('game', ['game' => $singleGame]);
+        else
+            return redirect('/games');
+
     }
 
     /**
