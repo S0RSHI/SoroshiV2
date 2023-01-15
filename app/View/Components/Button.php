@@ -4,18 +4,16 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class link extends Component
+class button extends Component
 {
-    // @return string
-    public $href;
+
 
     // @return boolean
     public $green;
     public $red;
 
-    public function __construct($href, $green, $red)
+    public function __construct($green, $red)
     {
-        $this->href = $href;
         $this->green = $green;
         $this->red = $red;
 
@@ -28,6 +26,6 @@ class link extends Component
      */
     public function render()
     {
-        return view('components.link');
+        return view('components.button');
     }
 }

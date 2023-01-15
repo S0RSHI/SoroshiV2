@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +37,10 @@ Route::get('/create-game', function () {
 Route::resource('games', GameController::class)
     ->only(['store'])
     ->middleware(['auth', 'verified']);
+
+Route::resource('review', ReviewController::class)
+->only(['store'])
+->middleware(['auth', 'verified']);
 
 Route::get('/games',[GameController::class, 'index'])->name('games');
 

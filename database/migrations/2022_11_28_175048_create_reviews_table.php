@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('id_game');
             $table->integer('score');
             $table->longText('message');
+            $table->integer('list_type');
             $table->timestamps();
         });
     }
