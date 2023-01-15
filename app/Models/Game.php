@@ -15,4 +15,6 @@ class Game extends Model
         'image',
         'description',
     ];
+
+    protected $dates = ['date_release'];
 }

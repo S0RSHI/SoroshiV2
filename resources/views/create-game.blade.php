@@ -41,8 +41,7 @@
                                 <x-primary-button>{{ __('SUBMIT') }}</x-primary-button>
                             </div>
                         </form>
-
-                        @if (session('isExist'))
+                        @if (session('error'))
                             <div id="isExist" class="w-full h-full fixed top-0 left-0 bg-black/[.5] backdrop-blur-sm flex items-center justify-center">
                                 <div class="p-4 sm:p-8 bg-red-600 rounded-lg max-w-lg m-5 h-fit relative">
                                     <div id="isExist__close" class="isExist__close absolute bg-gray-100 rounded-full p-2 hover:cursor-pointer hover:opacity-80">

@@ -11,5 +11,18 @@
             @endif
         </div>
 
+        @if(session('status') == 'game created')
+            <div class="fast-alert fixed right-2 top-2 p-4 bg-green-700 shadow-sm">
+                <h3 class="text-white">Gra została pomyślnie utworozna</h3>
+            </div>
+            <script>
+                let allAlert = document.querySelectorAll('.fast-alert');
+                allAlert.forEach((e, i) => {
+                    setTimeout(() => {
+                        e.style.display = 'none';
+                    }, (i * 500 + 2000))
+                });
+            </script>
+        @endif
     </div>
 </x-app-layout>

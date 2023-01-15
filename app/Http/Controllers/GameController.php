@@ -61,12 +61,12 @@ class GameController extends Controller
             ['date_release', '=' , $validated['date_release']]
         ])->first();
 
-        if(!$isExist)
+        if($isExist) {
+            return back()->with('error', 'game exist');
+        } else {
             $request->user()->games()->create($validated);
-        else
-            return back()->with('status', 409);
-
-        return redirect('/dashboard')->with('status', 200);
+            return redirect()->to('/dashboard')->with('status', 'game created');
+        }
     }
 
     /**
