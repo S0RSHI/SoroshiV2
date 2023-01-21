@@ -25,7 +25,7 @@
                         <div onclick="toggle(popup0)" class="w-full">
                             <x-button :purple="true" :red="false" :active="true">
                                 @if (!$list)
-                                    Dodaj do listy
+                                    Add to list
                                 @else
                                     @if($list->list_type == 1)
                                         Played
@@ -38,7 +38,7 @@
 
                             </x-link></div>
                             @if (Auth::user() && Auth::user()->is_admin)
-                                <x-button :purple="false" :red="false">Edytuj</x-link>
+                                <x-button :purple="false" :red="false">Edit</x-link>
                             @endif
                     </div>
                 </div>
@@ -51,7 +51,7 @@
             </div>
         </div>
     </div>
-    <div id="popup0" class="fixed hidden flex justify-center items-center w-full h-full top-0 left-0 bg-gray-900/8 backdrop-blur">
+    <div id="popup0" class="fixed hidden  justify-center items-center w-full h-full top-0 left-0 bg-gray-900/8 backdrop-blur">
         <div class="p-10 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-2/3 h-2/3 flex items-center justify-center relative">
             <div onclick="toggle(popup0)" class="text-white rounded-full flex justify-center items-center w-8 aspect-square bg-slate-600 hover:bg-slate-700 cursor-pointer absolute right-4 top-4">X</div>
             <form method="POST" action="{{ route('review.store')}}" class="mt-6 space-y-6 w-full h-full">
@@ -88,8 +88,13 @@
     </div>
     <script>
         function toggle(div_id) {
-            if(div_id.classList.contains('hidden')) div_id.classList.remove('hidden');
-            else div_id.classList.add('hidden');
+            if(div_id.classList.contains('hidden')) {
+                div_id.classList.add('flex');
+                div_id.classList.remove('hidden');
+            } else {
+                div_id.classList.add('hidden');
+                div_id.classList.remove('flex');
+            }
         }
     </script>
 </x-app-layout>

@@ -33,7 +33,7 @@
 
                             <div>
                                 <x-input-label for="description" :value="__('Game description')" />
-                                <x-textarea id="description" class="block mt-1 w-full" type="text" name="description" placeholder="This game is about something"/>
+                                <x-textarea :value="null" id="description" class="block mt-1 w-full" type="text" name="description" placeholder="This game is about something"/>
                                 <x-input-error :messages="$errors->get('description')" class="mt-2" />
                             </div>
 

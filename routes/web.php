@@ -17,18 +17,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-      return Auth::check() ? redirect()->route('dashboard') : view('welcome');
+      return Auth::check() ? view('welcome') :redirect()->route('login');
 });
 
-Route::get('/game/{id}', [GameController::class, 'show'])->name('game');
+Route::get('/game/{id}', [GameController::class, 'show'])->name('game')->middleware('auth');
 
-Route::get('/list/{name}', [ReviewController::class, 'myList'])->name('list');
+Route::get('/list/{name}', [ReviewController::class, 'myList'])->name('list')->middleware('auth');
 
-Route::get('/dashboard', [ReviewController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [ReviewController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard')->middleware('auth');
 
 Route::get('/create-game', function () {
   return Auth::user()->is_admin ? view('create-game') : redirect()->route('dashboard');
-})->name('create-game');
+})->name('create-game')->middleware('auth');
 
 Route::resource('games', GameController::class)
     ->only(['store'])
@@ -38,7 +38,7 @@ Route::resource('review', ReviewController::class)
 ->only(['store'])
 ->middleware(['auth', 'verified']);
 
-Route::get('/games',[GameController::class, 'index'])->name('games');
+Route::get('/games',[GameController::class, 'index'])->name('games')->middleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

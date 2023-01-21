@@ -1,6 +1,16 @@
 <x-app-layout>
     <div class="py-12">
 
+        @if (!Auth::user()->is_admin && count($lists_played) < 1)
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex align-middle justify-center">
+                    <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                        Unfortunately no games have been added to any list.
+                    </h2>
+                </div>
+            </div>
+        @endif
+
         @if (Auth::user()->is_admin)
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
