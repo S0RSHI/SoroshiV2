@@ -22,6 +22,31 @@ return new class extends Migration
             $table->integer('list_type');
             $table->timestamps();
         });
+
+        DB::unprepared('
+CREATE TRIGGER scoreTriggerUpdate AFTER UPDATE ON reviews
+FOR EACH ROW BEGIN
+DECLARE SUM_SCORE FLOAT;
+DECLARE ALL_SCORES INT;
+DECLARE FINAL_SCORE FLOAT;
+SET @SUM_SCORE = (SELECT SUM(score) FROM reviews WHERE (id_game = NEW.id_game));
+SET @ALL_SCORES = (SELECT COUNT(score) FROM reviews WHERE (id_game = NEW.id_game));
+SET @FINAL_SCORE = @SUM_SCORE/@ALL_SCORES;
+UPDATE games SET score = @FINAL_SCORE WHERE id = NEW.id_game;
+END
+');
+DB::unprepared('
+CREATE TRIGGER scoreTriggerInsert AFTER INSERT ON reviews
+FOR EACH ROW BEGIN
+DECLARE SUM_SCORE FLOAT;
+DECLARE ALL_SCORES INT;
+DECLARE FINAL_SCORE FLOAT;
+SET @SUM_SCORE = (SELECT SUM(score) FROM reviews WHERE (id_game = NEW.id_game));
+SET @ALL_SCORES = (SELECT COUNT(score) FROM reviews WHERE (id_game = NEW.id_game));
+SET @FINAL_SCORE = @SUM_SCORE/@ALL_SCORES;
+UPDATE games SET score = @FINAL_SCORE WHERE id = NEW.id_game;
+END
+');
     }
 
     /**

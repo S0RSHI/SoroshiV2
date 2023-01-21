@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('image');
             $table->longText('description');
             $table->date('date_release');
-            $table->integer('score')->default(0);
+            $table->float('score')->default(0);
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
