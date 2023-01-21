@@ -15,7 +15,11 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard', [
+            'lists_played' => Review::where(['id_user'=> auth()->user()->id, 'list_type' => 1])->paginate(4),
+            'lists_playing' => Review::where(['id_user'=> auth()->user()->id, 'list_type' => 2])->paginate(4),
+            'lists_toPlay' => Review::where(['id_user'=> auth()->user()->id, 'list_type' => 3])->paginate(4)
+        ]);
     }
 
     /**

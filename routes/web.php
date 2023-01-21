@@ -22,13 +22,7 @@ Route::get('/', function () {
 
 Route::get('/game/{id}', [GameController::class, 'show'])->name('game');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/dashboard', function () {
-  return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [ReviewController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/create-game', function () {
   return Auth::user()->is_admin ? view('create-game') : redirect()->route('dashboard');

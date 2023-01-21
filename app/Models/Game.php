@@ -16,5 +16,10 @@ class Game extends Model
         'description',
     ];
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'id_game');
+    }
+
     protected $dates = ['date_release'];
 }

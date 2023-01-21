@@ -12,7 +12,7 @@
                         <div onclick="toggle(popup0)" class="w-full"><x-button :green="true" :red="false" :active="true">Dodaj do listy</x-link></div>
 
                         <x-button :green="false" :red="true" :active="true">Usuń z listy</x-link>
-                        @if (Auth::user()->is_admin)
+                        @if (Auth::user() && Auth::user()->is_admin)
                             <x-button :green="false" :red="false">Edytuj</x-link>
                         @endif
                     </div>

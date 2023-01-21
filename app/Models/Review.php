@@ -16,4 +16,9 @@ class Review extends Model
         'message',
         'list_type'
     ];
+
+    public function game()
+    {
+        return $this->belongsTo(Game::class, 'id_game');
+    }
 }
