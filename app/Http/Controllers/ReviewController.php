@@ -85,7 +85,7 @@ class ReviewController extends Controller
             Review::create([
                 'id_user'=> auth()->user()->id,
                 'id_game'=> $request->game_id,
-                'score' => $request->score ? $request->score : 0,
+                'score' => $request->score ? $request->score : NULL,
                 'message' => $request->message ? $request->message : '',
                 'list_type' => $request->list
             ])->save();
@@ -97,7 +97,7 @@ class ReviewController extends Controller
             ])->update([
                 'id_user'=> auth()->user()->id,
                 'id_game'=> $request->game_id,
-                'score' => $request->score ? $request->score : 0,
+                'score' => $request->score ? $request->score : NULL,
                 'message' => $request->message ? $request->message : '',
                 'list_type' => $request->list
             ]);

@@ -36,10 +36,8 @@
                                     @endif
                                 @endif
 
-                            </x-link></div>
-                            @if (Auth::user() && Auth::user()->is_admin)
-                                <x-button :purple="false" :red="false">Edit</x-link>
-                            @endif
+                            </x-link>
+                        </div>
                     </div>
                 </div>
                 <div class="w-full flex flex-col gap-4 justify-between">
