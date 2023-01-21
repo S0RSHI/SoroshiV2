@@ -44,7 +44,7 @@ class ReviewController extends Controller
             [
                 'game_id' => 'required|numeric',
                 'list' => 'required|numeric|min:0|max:3',
-                'score' => 'numeric|min:0|max:10',
+                'score' => 'nullable|numeric|min:0|max:10',
                 'message' => 'max:5000'
             ],
             [
