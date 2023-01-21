@@ -1,4 +1,17 @@
 <x-app-layout>
+    @if(session('status'))
+    <div class="fast-alert z-50 w-full fixed bottom-0 left-0 p-4 text-center rounded-t-md bg-green-700 shadow-sm">
+        <h3 class="text-white">{{(session('status'))}}</h3>
+    </div>
+    <script>
+        let allAlert = document.querySelectorAll('.fast-alert');
+        allAlert.forEach((e, i) => {
+            setTimeout(() => {
+                e.style.display = 'none';
+            }, (i * 500 + 2000))
+        });
+    </script>
+@endif
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex gap-4">
@@ -9,12 +22,26 @@
                     <h3 class="mb-1 text-md text-slate-300">Ogólna ocena: {{$game->score}} / 10</h3>
                     <p class="mb-2 text-md text-slate-300">Data wydania: {{$game->date_release->format('d / m / Y')}}</p>
                     <div class="flex flex-col gap-2">
-                        <div onclick="toggle(popup0)" class="w-full"><x-button :green="true" :red="false" :active="true">Dodaj do listy</x-link></div>
+                        <div onclick="toggle(popup0)" class="w-full">
+                            <x-button :purple="true" :red="false" :active="true">
+                                @if (!$list)
+                                    Dodaj do listy
+                                @else
+                                    @if($list->list_type == 1)
+                                        Played
+                                    @elseif ($list->list_type == 2)
+                                        Playing
+                                    @else
+                                        Want to Play
+                                    @endif
+                                @endif
 
-                        <x-button :green="false" :red="true" :active="true">Usuń z listy</x-link>
-                        @if (Auth::user() && Auth::user()->is_admin)
-                            <x-button :green="false" :red="false">Edytuj</x-link>
-                        @endif
+                            </x-link></div>
+
+                            <x-button :purple="false" :red="true" :active="true">Usuń z listy</x-link>
+                            @if (Auth::user() && Auth::user()->is_admin)
+                                <x-button :purple="false" :red="false">Edytuj</x-link>
+                            @endif
                     </div>
                 </div>
                 <div class="w-full flex flex-col gap-4 justify-between">
@@ -37,22 +64,22 @@
                 <div class="w-full">
                     <x-input-label for="list" :value="__('Chose your list')" />
                     <select name="list" id="list" class="mt-1 border-gray-700 focus:border-indigo-600 w-full shadow-sm cursor-pointer border-w bg-gray-900 text-white rounded-md outline-none">
-                        <option value="1">Played</option>
-                        <option value="2">Playing</option>
-                        <option value="3">To play</option>
+                        <option value="1"  @if($list && $list->list_type == 1) selected="selected" @endif>Played</option>
+                        <option value="2"  @if($list && $list->list_type == 2) selected="selected" @endif>Playing</option>
+                        <option value="3"  @if($list && $list->list_type == 3) selected="selected" @endif>Want to play</option>
                     </select>
                     <x-input-error :messages="$errors->get('list')" class="mt-2" />
                 </div>
 
                 <div class="w-full">
                     <x-input-label for="score" :value="__('Your score (not required)')" />
-                    <x-text-input id="score" class="block mt-1 w-full" type="number" min="0" max="10" name="score" placeholder="Score 0 - 10" autofocus/>
+                    <x-text-input id="score" myv="{{($list && $list->score ) ? $list->score : ''}}" class="block mt-1 w-full" type="number" min="0" max="10" name="score" placeholder="Score 0 - 10" autofocus/>
                     <x-input-error :messages="$errors->get('score')" class="mt-2" />
                 </div>
 
                 <div class="w-full">
                     <x-input-label for="message" :value="__('Short message (not required)')" />
-                    <x-textarea id="message" class="block mt-1 w-full" type="text" name="message" placeholder="Your short message"/>
+                    <x-textarea id="message" value="{{($list && $list->message ) ? $list->message : ''}}" class="block mt-1 w-full" type="text" name="message" placeholder="Your short message"/>
                     <x-input-error :messages="$errors->get('message')" class="mt-2" />
                 </div>
 

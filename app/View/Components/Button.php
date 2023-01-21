@@ -9,12 +9,12 @@ class button extends Component
 
 
     // @return boolean
-    public $green;
+    public $purple;
     public $red;
 
-    public function __construct($green, $red)
+    public function __construct($purple, $red)
     {
-        $this->green = $green;
+        $this->purple = $purple;
         $this->red = $red;
 
     }

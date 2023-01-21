@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use App\Models\Review;
 use Illuminate\Http\Request;
+
 
 class GameController extends Controller
 {
@@ -77,11 +79,24 @@ class GameController extends Controller
      */
     public function show(Game $game, $id)
     {
+        $list = Review::where(['id_user'=> auth()->user()->id, 'id_game' => $id])->first();
         $singleGame = Game::find($id);
-        if($singleGame)
-            return view('game', ['game' => $singleGame]);
-        else
+        if($singleGame) {
+            if($list){
+                return view('game', [
+                    'game' => $singleGame,
+                    'list' => $list
+                ]);
+            } else {
+                return view('game', [
+                    'game' => $singleGame,
+                    'list' => null
+                ]);
+            }
+        } else {
             return redirect('/games');
+        }
+
 
     }
 
