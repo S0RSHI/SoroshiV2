@@ -12,6 +12,7 @@ class GameTile extends Component
      * @var object
      */
     public $item;
+    public $isLink;
 
     /**
      * Create a new component instance.
@@ -19,9 +20,10 @@ class GameTile extends Component
      * @param object
      * @return void
      */
-    public function __construct($item)
+    public function __construct($item, $isLink)
     {
         $this->item = $item;
+        $this->isLink = $isLink;
     }
 
     /**

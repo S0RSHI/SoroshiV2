@@ -7,7 +7,13 @@
             @if(count($games) > 0)
                 <div class="grid grid-cols-4 justify-items-center gap-12">
                     @foreach ($games as $game)
-                        <x-game-tile :item="$game->game"/>
+                        <x-game-tile :isLink=false :item="$game->game">
+                            <div class="vc__tile-buttons absolute flex justify-between items-center top-0 left-0 p-10 w-full h-full flex-col py-20">
+                                <x-game-link :purple="false" :red="false" :link="route('game', ['id' => $game->game->id])">Show game</x-game-link>
+                                <x-game-link :purple="true" :red="false" :link="route('game', ['id' => $game->game->id])">Show your info</x-game-link>
+                                <x-game-link :purple="false" :red="true" :link="route('game', ['id' => $game->game->id])">Remove from list</x-game-link>
+                            </div>
+                        </x-game-tile>
                     @endforeach
                 </div>
                 <div class="mt-12">

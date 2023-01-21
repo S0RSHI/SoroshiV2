@@ -23,3 +23,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     top: -12px;
     right: -12px;
 }
+
+.vc__tile-buttons a,
+.vc__tile-buttons button {
+    display: none;
+}
+
+.vc__tile-buttons:hover a,
+.vc__tile-buttons:hover button {
+    display: flex;
+}
