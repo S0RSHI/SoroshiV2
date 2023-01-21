@@ -37,8 +37,6 @@
                                 @endif
 
                             </x-link></div>
-
-                            <x-button :purple="false" :red="true" :active="true">Usuń z listy</x-link>
                             @if (Auth::user() && Auth::user()->is_admin)
                                 <x-button :purple="false" :red="false">Edytuj</x-link>
                             @endif
@@ -58,7 +56,6 @@
             <div onclick="toggle(popup0)" class="text-white rounded-full flex justify-center items-center w-8 aspect-square bg-slate-600 hover:bg-slate-700 cursor-pointer absolute right-4 top-4">X</div>
             <form method="POST" action="{{ route('review.store')}}" class="mt-6 space-y-6 w-full h-full">
                 @csrf
-                <p>{{session('status')}}</p>
                 <input type="hidden" name="game_id" id="game_id" value="{{ $game->id }}" />
 
                 <div class="w-full">
