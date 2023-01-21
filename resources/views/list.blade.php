@@ -1,10 +1,10 @@
 <x-app-layout>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">
+                {{$name}}
+            </h2>
             @if(count($games) > 0)
-                <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">
-                    {{$name}}
-                </h2>
                 <div class="grid grid-cols-4 justify-items-center gap-12">
                     @foreach ($games as $game)
                         <x-game-tile :item="$game->game"/>
