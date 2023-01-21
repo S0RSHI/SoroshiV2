@@ -146,8 +146,18 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Review $review)
+    public function destroy($id_list)
     {
-        //
+        $list = Review::where([
+            'id'=> $id_list,
+            'id_user'=> auth()->user()->id
+        ]);
+
+        if($list->exists()) {
+            $list->delete();
+            return redirect()->to('/dashboard')->with('status', 'The game has been removed from the list');
+        } else {
+            return redirect()->to('/dashboard')->with('status', 'The game cannot be removed from the list because it is not in any list.');
+        }
     }
 }

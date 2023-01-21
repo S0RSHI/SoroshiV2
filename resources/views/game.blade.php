@@ -1,5 +1,5 @@
 <x-app-layout>
-    @if(session('status'))
+    @if(session('status') && session('status') != 'info')
     <div class="fast-alert z-50 w-full fixed bottom-0 left-0 p-4 text-center rounded-t-md bg-green-700 shadow-sm">
         <h3 class="text-white">{{(session('status'))}}</h3>
     </div>
@@ -51,15 +51,15 @@
             </div>
         </div>
     </div>
-    <div id="popup0" class="fixed hidden  justify-center items-center w-full h-full top-0 left-0 bg-gray-900/8 backdrop-blur">
-        <div class="p-10 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-2/3 h-2/3 flex items-center justify-center relative">
-            <div onclick="toggle(popup0)" class="text-white rounded-full flex justify-center items-center w-8 aspect-square bg-slate-600 hover:bg-slate-700 cursor-pointer absolute right-4 top-4">X</div>
+    <div id="popup0" class="@if(session('status') == 'info') flex @else hidden  @endif fixed justify-center items-center w-full h-full top-0 left-0 bg-gray-900/8 backdrop-blur">
+        <div class="p-10 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg w-2/3 h-2/3 flex items-center justify-center relative flex-col">
+            <div onclick="toggle(popup0)" class="text-white rounded-full flex-co flex justify-center items-center w-8 aspect-square bg-slate-600 hover:bg-slate-700 cursor-pointer absolute right-4 top-4">X</div>
             <form method="POST" action="{{ route('review.store')}}" class="mt-6 space-y-6 w-full h-full">
                 @csrf
                 <input type="hidden" name="game_id" id="game_id" value="{{ $game->id }}" />
 
                 <div class="w-full">
-                    <x-input-label for="list" :value="__('Chose your list')" />
+                    <x-input-label for="list" :value="__('Your list')" />
                     <select name="list" id="list" class="mt-1 border-gray-700 focus:border-indigo-600 w-full shadow-sm cursor-pointer border-w bg-gray-900 text-white rounded-md outline-none">
                         <option value="1"  @if($list && $list->list_type == 1) selected="selected" @endif>Played</option>
                         <option value="2"  @if($list && $list->list_type == 2) selected="selected" @endif>Playing</option>
@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="w-full">
-                    <x-input-label for="message" :value="__('Short message (not required)')" />
+                    <x-input-label for="message" :value="__('Your note (not required)')" />
                     <x-textarea id="message" value="{{($list && $list->message ) ? $list->message : ''}}" class="block mt-1 w-full" type="text" name="message" placeholder="Your short message"/>
                     <x-input-error :messages="$errors->get('message')" class="mt-2" />
                 </div>
@@ -84,6 +84,11 @@
                     <x-primary-button>{{ __('SUBMIT') }}</x-primary-button>
                 </div>
             </form>
+            @if($list)
+                <div class="w-fit absolute right-4 bottom-4">
+                    <x-game-link :purple="false" :red="true" :link="route('list-remove', ['id' => $list->id])">Remove from list</x-game-link>
+                </div>
+            @endif
         </div>
     </div>
     <script>

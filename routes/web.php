@@ -30,9 +30,15 @@ Route::get('/create-game', function () {
   return Auth::user()->is_admin ? view('create-game') : redirect()->route('dashboard');
 })->name('create-game')->middleware('auth');
 
+Route::get('/my-game/{id}', function ($id) {
+    return  redirect()->to('/game/'.$id)->with('status', 'info');
+  })->name('my-game')->middleware('auth');
+
 Route::resource('games', GameController::class)
     ->only(['store'])
     ->middleware(['auth', 'verified']);
+
+    Route::get('list-remove/{id}', [ReviewController::class, 'destroy'])->name('list-remove')->middleware('auth');
 
 Route::resource('review', ReviewController::class)
 ->only(['store'])

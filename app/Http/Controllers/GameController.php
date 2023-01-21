@@ -67,7 +67,7 @@ class GameController extends Controller
             return back()->with('error', 'game exist');
         } else {
             $request->user()->games()->create($validated);
-            return redirect()->to('/dashboard')->with('status', 'game created');
+            return redirect()->to('/dashboard')->with('status', 'The game was created');
         }
     }
 

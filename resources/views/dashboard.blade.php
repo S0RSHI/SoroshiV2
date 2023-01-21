@@ -30,9 +30,13 @@
                     </h2>
                     <div class="grid grid-cols-4">
                         @foreach ($lists_played as $list)
-                                <a href="{{route('game', ['id' => $list->id_game])}}">
-                                    <img class="rounded-md opacity-70 h-80 w-64 object-cover" src="{{$list->game->image}}" alt="banner-game">
-                                </a>
+                            <x-game-tile :isLink=false :item="$list->game">
+                                <div class="vc__tile-buttons absolute flex justify-between items-center top-0 left-0 p-10 w-full h-full flex-col py-20">
+                                    <x-game-link :purple="false" :red="false" :link="route('game', ['id' => $list->game->id])">Show game</x-game-link>
+                                    <x-game-link :purple="true" :red="false" :link="route('my-game', ['id' => $list->game->id])">Show your info</x-game-link>
+                                    <x-game-link :purple="false" :red="true" :link="route('list-remove', ['id' => $list->id])">Remove from list</x-game-link>
+                                </div>
+                            </x-game-tile>
                         @endforeach
                     </div>
                 </div>
@@ -48,9 +52,13 @@
                     </h2>
                     <div class="grid grid-cols-4">
                         @foreach ($lists_playing as $list)
-                                <a href="{{route('game', ['id' => $list->id_game])}}">
-                                    <img class="rounded-md opacity-70 h-80 w-64 object-cover" src="{{$list->game->image}}" alt="banner-game">
-                                </a>
+                            <x-game-tile :isLink=false :item="$list->game">
+                                <div class="vc__tile-buttons absolute flex justify-between items-center top-0 left-0 p-10 w-full h-full flex-col py-20">
+                                    <x-game-link :purple="false" :red="false" :link="route('game', ['id' => $list->game->id])">Show game</x-game-link>
+                                    <x-game-link :purple="true" :red="false" :link="route('game', ['id' => $list->game->id])">Show your info</x-game-link>
+                                    <x-game-link :purple="false" :red="true" :link="route('list-remove', ['id' => $list->id])">Remove from list</x-game-link>
+                                </div>
+                            </x-game-tile>
                         @endforeach
                     </div>
                 </div>
@@ -66,10 +74,14 @@
                     </h2>
                     <div class="grid grid-cols-4">
                         @foreach ($lists_toPlay as $list)
-                        <a href="{{route('game', ['id' => $list->id_game])}}">
-                            <img class="rounded-md opacity-70 h-80 w-64 object-cover" src="{{$list->game->image}}" alt="banner-game">
-                        </a>
-                @endforeach
+                            <x-game-tile :isLink=false :item="$list->game">
+                                <div class="vc__tile-buttons absolute flex justify-between items-center top-0 left-0 p-10 w-full h-full flex-col py-20">
+                                    <x-game-link :purple="false" :red="false" :link="route('game', ['id' => $list->game->id])">Show game</x-game-link>
+                                    <x-game-link :purple="true" :red="false" :link="route('game', ['id' => $list->game->id])">Show your info</x-game-link>
+                                    <x-game-link :purple="false" :red="true" :link="route('list-remove', ['id' => $list->id])">Remove from list</x-game-link>
+                                </div>
+                            </x-game-tile>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -77,16 +89,16 @@
     </div>
 
 
-    @if(session('status') == 'game created')
-        <div class="fast-alert z-50 w-full fixed bottom-0 left-0 p-4 text-center rounded-t-md bg-green-700 shadow-sm">
-            <h3 class="text-white">Gra została pomyślnie utworozna</h3>
+    @if(session('status'))
+        <div class="fast-alert z-50 w-full fixed bottom-0 left-0 p-4 text-center rounded-t-md {{(session('status') == 'The game cannot be removed from the list because it is not in any list.') ? 'bg-red-600' : 'bg-green-700'}} shadow-sm">
+            <h3 class="text-white">{{session('status')}}</h3>
         </div>
         <script>
             let allAlert = document.querySelectorAll('.fast-alert');
             allAlert.forEach((e, i) => {
                 setTimeout(() => {
                     e.style.display = 'none';
-                }, (i * 500 + 2000))
+                }, (i * 500 + 3000))
             });
         </script>
     @endif
