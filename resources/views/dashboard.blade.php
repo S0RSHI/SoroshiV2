@@ -55,7 +55,7 @@
                             <x-game-tile :isLink=false :item="$list->game">
                                 <div class="vc__tile-buttons absolute flex justify-between items-center top-0 left-0 p-10 w-full h-full flex-col py-20">
                                     <x-game-link :purple="false" :red="false" :link="route('game', ['id' => $list->game->id])">Show game</x-game-link>
-                                    <x-game-link :purple="true" :red="false" :link="route('game', ['id' => $list->game->id])">Show your info</x-game-link>
+                                    <x-game-link :purple="true" :red="false" :link="route('my-game', ['id' => $list->game->id])">Show your info</x-game-link>
                                     <x-game-link :purple="false" :red="true" :link="route('list-remove', ['id' => $list->id])">Remove from list</x-game-link>
                                 </div>
                             </x-game-tile>
@@ -77,7 +77,7 @@
                             <x-game-tile :isLink=false :item="$list->game">
                                 <div class="vc__tile-buttons absolute flex justify-between items-center top-0 left-0 p-10 w-full h-full flex-col py-20">
                                     <x-game-link :purple="false" :red="false" :link="route('game', ['id' => $list->game->id])">Show game</x-game-link>
-                                    <x-game-link :purple="true" :red="false" :link="route('game', ['id' => $list->game->id])">Show your info</x-game-link>
+                                    <x-game-link :purple="true" :red="false" :link="route('my-game', ['id' => $list->game->id])">Show your info</x-game-link>
                                     <x-game-link :purple="false" :red="true" :link="route('list-remove', ['id' => $list->id])">Remove from list</x-game-link>
                                 </div>
                             </x-game-tile>
