@@ -32,7 +32,7 @@
                                     @elseif ($list->list_type == 2)
                                         Playing
                                     @else
-                                        Want to Play
+                                        Plan to Play
                                     @endif
                                 @endif
 
@@ -63,7 +63,7 @@
                     <select name="list" id="list" class="mt-1 border-gray-700 focus:border-indigo-600 w-full shadow-sm cursor-pointer border-w bg-gray-900 text-white rounded-md outline-none">
                         <option value="1"  @if($list && $list->list_type == 1) selected="selected" @endif>Played</option>
                         <option value="2"  @if($list && $list->list_type == 2) selected="selected" @endif>Playing</option>
-                        <option value="3"  @if($list && $list->list_type == 3) selected="selected" @endif>Want to play</option>
+                        <option value="3"  @if($list && $list->list_type == 3) selected="selected" @endif>Plan to play</option>
                     </select>
                     <x-input-error :messages="$errors->get('list')" class="mt-2" />
                 </div>

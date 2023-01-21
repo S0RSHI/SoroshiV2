@@ -22,11 +22,13 @@ Route::get('/', function () {
 
 Route::get('/game/{id}', [GameController::class, 'show'])->name('game');
 
+Route::get('/list/{name}', [ReviewController::class, 'myList'])->name('list');
+
 Route::get('/dashboard', [ReviewController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/create-game', function () {
   return Auth::user()->is_admin ? view('create-game') : redirect()->route('dashboard');
-});
+})->name('create-game');
 
 Route::resource('games', GameController::class)
     ->only(['store'])

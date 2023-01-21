@@ -22,6 +22,29 @@ class ReviewController extends Controller
         ]);
     }
 
+    public function myList($name)
+    {
+       if($name == 'played') {
+
+        return view('list', [
+            'games' => Review::where(['id_user'=> auth()->user()->id, 'list_type' => 1])->paginate(16),
+            'name' => 'Played'
+        ]);
+       }else if($name == 'playing'){
+        return view('list', [
+            'games' => Review::where(['id_user'=> auth()->user()->id, 'list_type' => 2])->paginate(16),
+            'name' => 'Playing'
+        ]);
+       }else if($name == 'plan-to-play'){
+        return view('list', [
+            'games' => Review::where(['id_user'=> auth()->user()->id, 'list_type' => 3])->paginate(16),
+            'name' => 'Plan to play'
+        ]);
+       } else {
+        return redirect()->route('dashboard');
+       }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
