@@ -18,7 +18,7 @@ class GameController extends Controller
     {
 
         return view('games', [
-           'games' => Game::paginate(16)
+           'games' => Game::paginate(12)
         ]);
     }
 

@@ -28,7 +28,7 @@
                         <span>Played</span>
                         <a class="text-sm hover:text-indigo-400" href="{{route('list', ['name' => 'played'])}}">Pokaż więcej</a>
                     </h2>
-                    <div class="grid grid-cols-4">
+                    <div class="grid-rows-1 grid xl:grid-cols-4 sm:grid-cols-2 overflow-hidden justify-center gap-y-4">
                         @foreach ($lists_played as $list)
                             <x-game-tile :isLink=false :item="$list->game">
                                 <div class="vc__tile-buttons absolute flex justify-between items-center top-0 left-0 p-10 w-full h-full flex-col py-20">
@@ -50,7 +50,7 @@
                         <span>Playing</span>
                         <a class="text-sm hover:text-indigo-400" href="{{route('list', ['name' => 'playing'])}}">Pokaż więcej</a>
                     </h2>
-                    <div class="grid grid-cols-4">
+                    <div class="grid-rows-1 grid xl:grid-cols-4 sm:grid-cols-2 overflow-hidden justify-center gap-y-4">
                         @foreach ($lists_playing as $list)
                             <x-game-tile :isLink=false :item="$list->game">
                                 <div class="vc__tile-buttons absolute flex justify-between items-center top-0 left-0 p-10 w-full h-full flex-col py-20">
@@ -72,7 +72,7 @@
                         <span>Plan to play</span>
                         <a class="text-sm hover:text-indigo-400" href="{{route('list', ['name' => 'plan-to-play'])}}">Pokaż więcej</a>
                     </h2>
-                    <div class="grid grid-cols-4">
+                    <div class="grid-rows-1 grid xl:grid-cols-4 sm:grid-cols-2 overflow-hidden justify-center gap-y-4">
                         @foreach ($lists_toPlay as $list)
                             <x-game-tile :isLink=false :item="$list->game">
                                 <div class="vc__tile-buttons absolute flex justify-between items-center top-0 left-0 p-10 w-full h-full flex-col py-20">

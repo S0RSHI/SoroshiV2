@@ -5,7 +5,7 @@
                 {{$name}}
             </h2>
             @if(count($games) > 0)
-                <div class="grid grid-cols-4 justify-items-center gap-12">
+                <div class="grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 justify-items-center gap-12">
                     @foreach ($games as $game)
                         <x-game-tile :isLink=false :item="$game->game">
                             <div class="vc__tile-buttons absolute flex justify-between items-center top-0 left-0 p-10 w-full h-full flex-col py-20">
