@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input[type="date"] {
+    position: relative;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
+
+.isExist__close {
+    top: -12px;
+    right: -12px;
+}
+
+.vc__tile-buttons a,
+.vc__tile-buttons button {
+    display: none;
+}
+
+.vc__tile-buttons:hover a,
+.vc__tile-buttons:hover button {
+    display: flex;
+}
